@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PlayerController
+namespace PlayerControllerNamespace
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
@@ -34,6 +34,7 @@ namespace PlayerController
         //Debug stop moving mouse down in editor
         int frameCounter = 0;
 
+        public bool IsInDialogue;
 
         //Calls on start
         private void Start()
@@ -51,10 +52,18 @@ namespace PlayerController
         // Update is called once per frame
         void Update()
         {
-            MouseInput();
-            Gravity();
-            //Apply mavity and movement
-            cc.Move((MovementDirection() * Time.deltaTime) + (playerVelocity * Time.deltaTime));
+
+            if (!IsInDialogue) 
+            {
+
+                MouseInput();
+                Gravity();
+                //Apply mavity and movement
+                cc.Move((MovementDirection() * Time.deltaTime) + (playerVelocity * Time.deltaTime));
+            }
+            
+
+            
         }
 
         /// <summary>
